@@ -12,6 +12,11 @@ import static utils.Constants.DEFAULT_TIMEOUT;
 /**
  * Created by natasha on 9/3/16.
  */
+
+/**
+ * This matcher is not used in test now. But it was useful for debug. So i decided not to remove it's code.
+ */
+
 public class WithTimeout {
 
     public static <T> MatcherDecoratorsBuilder withWaitFor(Matcher<? super T> matcher, int seconds) {

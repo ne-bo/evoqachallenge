@@ -95,7 +95,6 @@ public class SearchResults extends BasePage {
 
     @Step("Select few random results")
     public SearchResults selectRandomResultsAtLeast(int minNumberOfResults) {
-
         List<Item> selectedItems = chooseSelectedItems(minNumberOfResults);
         selectedItems.forEach(Item::select);
         this.selectedItems = selectedItems;

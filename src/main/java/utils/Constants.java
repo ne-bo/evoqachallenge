@@ -15,7 +15,7 @@ import static utils.Constants.SearchFormFields.*;
  */
 public class Constants {
 
-    public enum Language {RU, LV, EN}
+    public enum Language {RU, LV}
 
     public static final String STR_ELECTRONICS = "Electronics";
     public static final String STR_WORK = "Work";
@@ -49,7 +49,6 @@ public class Constants {
                     .build();
 
     public static final int DEFAULT_TIMEOUT = 1;
-    public static final int TIMEOUT_ON_SEARCH_PAGE = 5;
 
     public enum SearchFormFields {KEYWORD, MIN_PRICE, MAX_PRICE}
 

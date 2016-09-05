@@ -12,4 +12,8 @@ public class Work extends BasePage {
         HtmlElementLoader.populatePageObject(this, driver);
         this.driver = driver;
     }
+
+    /*Some code here*/
+
+    /*This calss was added jus to show that we can work with different blocks, not only with Electronics.*/
 }

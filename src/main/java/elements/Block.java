@@ -2,7 +2,6 @@ package elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import utils.Constants;
 
 import static utils.Constants.blocksClasses;
@@ -11,7 +10,7 @@ import static utils.LocalisationUtils.getBlockNameInEnglish;
 /**
  * Created by natasha on 8/31/16.
  */
-public class Block extends HtmlElement {
+public class Block {
 
     String blockName;
     String blockNameInEnglish;

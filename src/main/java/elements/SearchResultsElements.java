@@ -56,7 +56,6 @@ public class SearchResultsElements extends HtmlElement {
 
     public List<List<WebElement>> getSearchResults() {
         List<List<WebElement>> rows = searchResults.getRows();
-        rows.remove(0);
         return rows;
     }
 
