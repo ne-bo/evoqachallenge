@@ -7,43 +7,37 @@ import pages.BasePage;
 import pages.MainPage;
 import pages.SearchPage;
 import pages.SearchResults;
-import steps.CommonSteps;
 import utils.Constants;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static ru.yandex.qatools.matchers.collection.HasSameItemsAsListMatcher.hasSameItemsAsList;
 import static utils.Constants.DEFAULT_SEARCH_DATA;
 import static utils.Constants.FiltersForSearchResults.TYPE_OF_DEAL;
 import static utils.Constants.Language.RU;
 import static utils.Constants.SearchFormFields.*;
+import static utils.Constants.URL;
 import static utils.LocalisationUtils.*;
 
 /**
  * Created by natasha on 8/29/16.
  */
 public class ShowSelectedGoods {
-    private final int MIN_RESULTS_COUNT;
+
 
     public WebDriver driver = new FirefoxDriver();
 
-    private CommonSteps commonSteps = new CommonSteps();
-
-    public ShowSelectedGoods() {
-        MIN_RESULTS_COUNT = 3;
-    }
-
-
     @Before
     public void loadStartPage() {
-        driver.get("https://www.ss.lv");
+        driver.get(URL);
     }
 
     @Test
     public void afterSearchingUserShouldSeSearchResults() {
+        // data is specific for this test, so it is in test, not in @Before
+        int minResultsCount = 3;
         Constants.Language desiredLanguage = RU;
 
         Map<Constants.SearchFormFields, String> searchData = new HashMap(DEFAULT_SEARCH_DATA);
@@ -54,10 +48,8 @@ public class ShowSelectedGoods {
         searchData.put(MIN_PRICE, "0");
         searchData.put(MAX_PRICE, "300");
 
-        MainPage startPage = new MainPage(driver);
-        MainPage mainPageWithChangedLanguage = startPage.changeLanguage(desiredLanguage);
-
-        assertThat(mainPageWithChangedLanguage.getLanguage(), equalTo(desiredLanguage));
+        //Start of scenario
+        MainPage mainPageWithChangedLanguage = new MainPage(driver).changeLanguage(desiredLanguage);
 
         BasePage electronics = mainPageWithChangedLanguage.selectBlock(getStringForElectronics(desiredLanguage));
 
@@ -71,17 +63,17 @@ public class ShowSelectedGoods {
 
         SearchPage advancedSearchPage = searchResults.goToAdvancedSearchForm();
 
-        SearchResults advancedSearchResults = advancedSearchPage.fillAndSubmitSearchForm(searchData);
+        SearchResults advancedSearchResults = advancedSearchPage.fillAndSubmitSearchForm(advancedSearchData);
 
-        advancedSearchResults.selectRandomResultsAtLeast(MIN_RESULTS_COUNT);
+        advancedSearchResults.selectRandomResultsAtLeast(minResultsCount);
 
         advancedSearchResults.showSelectedItems();
 
-        assertThat("Only selected items should be shown! ",
+        //Final check (I prefer style with 1 asset per test)
+        assertThat("Selected items and only them should be shown! ",
                 advancedSearchResults.getSelectedItems(),
                 hasSameItemsAsList(advancedSearchResults.getItemsInSelectedSearchResults()));
 
-        commonSteps.waitForSeconds(5);
     }
 
     @After

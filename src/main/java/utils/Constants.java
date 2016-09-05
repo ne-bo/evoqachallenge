@@ -15,6 +15,8 @@ import static utils.Constants.SearchFormFields.*;
  */
 public class Constants {
 
+    public static final String URL = "https://www.ss.lv";
+
     public enum Language {RU, LV}
 
     public static final String STR_ELECTRONICS = "Electronics";
